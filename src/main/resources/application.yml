@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://127.0.0.1:1433;databaseName=Notherwind;integratedSecurity=true;
+    username: WebClient
+    password: 340$Uuxwp7Mcxo7Khy
+  security:
+    user:
+      name: root
+      password: root
+
+  data:
+    mongodb:
+      username: webMongo
+      password: 123Mongo
+      database: Northwind
+      port: 28017
+      host: 127.0.0.1
