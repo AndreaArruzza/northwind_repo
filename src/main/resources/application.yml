@@ -1,18 +1,24 @@
 spring:
-  datasource:
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://127.0.0.1:1433;databaseName=Notherwind;integratedSecurity=true;
-    username: WebClient
-    password: 340$Uuxwp7Mcxo7Khy
-  security:
-    user:
-      name: root
-      password: root
-
-  data:
-    mongodb:
-      username: webMongo
-      password: 123Mongo
-      database: Northwind
-      port: 28017
-      host: 127.0.0.1
+ application:
+    name: northwind
+ profiles:
+      active: local
+ datasource:
+      driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://127.0.0.1:1433;databaseName=Notherwind;integratedSecurity=true;
+      username: WebClient
+      password: 340$Uuxwp7Mcxo7Khy
+      
+ data:
+  mongodb:
+    repositories:
+      enabled: true
+    database: Northwind
+    uri: mongodb://mongoadmin:123Mongo@127.0.0.1:28017/?authSource=admin&authMechanism=SCRAM-SHA-1
+          
+logging:
+  level:
+    root: INFO
+    com.northwind.northwind: DEBUG
+    #org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    #org.springframework.jdbc.core.StatementCreatorUtils: TRACE    
