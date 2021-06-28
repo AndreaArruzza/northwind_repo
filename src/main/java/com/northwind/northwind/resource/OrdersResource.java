@@ -34,8 +34,6 @@ public class OrdersResource {
 	public void setFreight(Double freight) {
 		this.freight = freight;
 	}
-	
-	
 	public List<ShipInformationOrders> getShipInformationOrders() {
 		return shipInformationOrders;
 	}

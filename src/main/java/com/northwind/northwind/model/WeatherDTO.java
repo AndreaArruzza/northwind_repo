@@ -1,69 +1,45 @@
 package com.northwind.northwind.model;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WeatherDTO {
-	
-	private LocalDate data;
-	private Double temperatura;
-	private Double temperaturaPercepita;
-	private Double temperaturaMin;
-	private Double temparaturaMax;
-	private Double umidità;
-	private String meteo;
-	private String meteoDescr;
-	public LocalDate getData() {
-		return data;
+	@JsonProperty("id")
+	private String id;
+	@JsonProperty("main")
+    private String main;
+	@JsonProperty("description")
+    private String description;
+	@JsonProperty("icon")
+    private String icon;
+    
+    
+	public String getId() {
+		return id;
 	}
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public Double getTemperatura() {
-		return temperatura;
+	public String getMain() {
+		return main;
 	}
-	public void setTemperatura(Double temperatura) {
-		this.temperatura = temperatura;
+	public void setMain(String main) {
+		this.main = main;
 	}
-	public Double getTemperaturaPercepita() {
-		return temperaturaPercepita;
+	public String getDescription() {
+		return description;
 	}
-	public void setTemperaturaPercepita(Double temperaturaPercepita) {
-		this.temperaturaPercepita = temperaturaPercepita;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public Double getTemperaturaMin() {
-		return temperaturaMin;
+	public String getIcon() {
+		return icon;
 	}
-	public void setTemperaturaMin(Double temperaturaMin) {
-		this.temperaturaMin = temperaturaMin;
-	}
-	public Double getTemparaturaMax() {
-		return temparaturaMax;
-	}
-	public void setTemparaturaMax(Double temparaturaMax) {
-		this.temparaturaMax = temparaturaMax;
-	}
-	public Double getUmidità() {
-		return umidità;
-	}
-	public void setUmidità(Double umidità) {
-		this.umidità = umidità;
-	}
-	public String getMeteo() {
-		return meteo;
-	}
-	public void setMeteo(String meteo) {
-		this.meteo = meteo;
-	}
-	public String getMeteoDescr() {
-		return meteoDescr;
-	}
-	public void setMeteoDescr(String meteoDescr) {
-		this.meteoDescr = meteoDescr;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "WeatherDTO [id=" + id + ", main=" + main + ", description=" + description + ", icon=" + icon + "]";
+	}
 }

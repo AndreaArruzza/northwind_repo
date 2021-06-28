@@ -1,23 +1,26 @@
 package com.northwind.northwind.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.northwind.northwind.assembler.OrdersAssembler;
-import com.northwind.northwind.model.Orders;
+import com.northwind.northwind.exception.OrdersException;
 import com.northwind.northwind.resource.OrdersResource;
 import com.northwind.northwind.service.OrdersService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path="/order", produces = { MediaType.APPLICATION_JSON_VALUE, "application/hal+json" })
@@ -30,15 +33,35 @@ public class OrdersController {
 	@Autowired
 	OrdersAssembler assembler;
 	
-	@GetMapping( path = "/getOrderByCustomerID")
-	@ApiOperation(value = "getOrderByCustomerID")
-	public List<OrdersResource> getOrders(@RequestParam("customerID") String customerID) {
-		logger.info("chiamata endpoint getOrderByCustomerID...");
-		List<Orders> listOrders = service.getOrderByCustomerID(customerID);
-		logger.info("fine chiamata endpoint getOrderByCustomerID: OK");
-		
-		List<OrdersResource> resource = new ArrayList<>();
-		listOrders.stream().forEach(p -> resource.add(assembler.instantiateResource(p)));
+	@ApiOperation(value = "return order by authentication")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
+	@GetMapping
+	public List<OrdersResource> getOrders() throws OrdersException {
+		logger.info("[getWeatherByCityID] - [START]");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		List<OrdersResource> resource = service.getOrdersByCustomerID(authentication.getName());
+		logger.info("[getWeatherByCityID] - [END]");
+		return resource;
+	}
+	
+
+	@ApiOperation(value = "return order by customer id ")
+	@ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Success|OK"),
+	            @ApiResponse(code = 401, message = "not authorized!"),
+	            @ApiResponse(code = 403, message = "forbidden!!!"),
+	            @ApiResponse(code = 404, message = "not found!!!") })
+	@GetMapping("/{customerID}")
+	public List<OrdersResource> getOrders(@RequestParam("customerID") String customerID) throws OrdersException {
+		logger.info("[getWeatherByCityID] - [START]");
+
+		List<OrdersResource> resource = service.getOrdersByCustomerID(customerID);
+		logger.info("[getWeatherByCityID] - [END]");
 		return resource;
 	}
 }

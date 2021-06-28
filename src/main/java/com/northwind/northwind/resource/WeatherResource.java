@@ -1,33 +1,50 @@
 package com.northwind.northwind.resource;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class WeatherResource {
+	private LocalDateTime date;
+	private Double temp;
+	private Double tempMin;
+	private Double tempMax;
+	private Integer humidity;
+	private String descrTemp;
 	
-	private LocalDate data;
-	private Double temperatura;
-	private String descrTemperatura;
-	
-	
-	public LocalDate getData() {
-		return data;
+	public LocalDateTime getDate() {
+		return date;
 	}
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
-	public Double getTemperatura() {
-		return temperatura;
+	public Double getTemp() {
+		return temp;
 	}
-	public void setTemperatura(Double temperatura) {
-		this.temperatura = temperatura;
+	public void setTemp(Double temp) {
+		this.temp = temp;
 	}
-	public String getDescrTemperatura() {
-		return descrTemperatura;
+	public Double getTempMin() {
+		return tempMin;
 	}
-	public void setDescrTemperatura(String descrTemperatura) {
-		this.descrTemperatura = descrTemperatura;
+	public void setTempMin(Double tempMin) {
+		this.tempMin = tempMin;
 	}
-	
-	
+	public Double getTempMax() {
+		return tempMax;
+	}
+	public void setTempMax(Double tempMax) {
+		this.tempMax = tempMax;
+	}
+	public Integer getHumidity() {
+		return humidity;
+	}
+	public void setHumidity(Integer humidity) {
+		this.humidity = humidity;
+	}
+	public String getDescrTemp() {
+		return descrTemp;
+	}
+	public void setDescrTemp(String descrTemp) {
+		this.descrTemp = descrTemp;
+	}
 	
 }

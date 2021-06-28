@@ -1,14 +1,19 @@
 package com.northwind.northwind.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.northwind.northwind.assembler.OrdersAssembler;
+import com.northwind.northwind.exception.OrdersException;
 import com.northwind.northwind.model.Orders;
 import com.northwind.northwind.repository.OrdersRepository;
+import com.northwind.northwind.resource.OrdersResource;
 
 @Service
 public class OrdersService  {
@@ -17,15 +22,36 @@ public class OrdersService  {
 	@Autowired
 	OrdersRepository repo;
 	
-	public List<Orders> getOrderByCustomerID(String customerID) {
-		logger.info("chiamata findByCustomerID con customerID ={}" + customerID);
+	@Autowired
+	OrdersAssembler assembler;
+	
+	public List<OrdersResource> getOrdersByCustomerID(String customerID) throws OrdersException {
+		logger.info("[getOrderByCustomerID] - [START] ---- customerID:  {}",customerID);
 		Orders order = new Orders();
 		order.setCustomerID(customerID);
-		List<Orders> listOrder = repo.findByCustomerID(order.getCustomerID());
-		logger.info("chiamata findByCustomerID con customerID = OK");
-		return listOrder;
+		
+		logger.info("[findByCustomerID] - [START] ---- customerID:  {}", customerID);
+		Optional<List<Orders>> ordersOptional= Optional.ofNullable(repo.findByCustomerID(order.getCustomerID()));
+		
+		List<Orders> listOrders =  ordersOptional.orElse(new ArrayList<>());
+		logger.info("[findByCustomerID] - [END] ---- listOrders:  {}", listOrders);
+		List<OrdersResource> resource = new ArrayList<>();
+		
+		if(!listOrders.isEmpty()) {
+			listOrders.stream().forEach(p -> 
+			{	
+				OrdersResource orderResource = assembler.toResource(p);
+				resource.add(orderResource);
+				logger.info(" orderResource:{}", orderResource);
+			});
+		}
+		else {
+			logger.error("  non vi sono ordini associati al customer ID indicato :  {}", customerID);
+			throw new OrdersException(" non vi sono ordini associati al customer ID indicato : ".concat(customerID));
+		}
+		
+		logger.info("[getOrderByCustomerID] - [END]");
+		return resource;
 	}
-	
-	
 	
 }

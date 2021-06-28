@@ -16,9 +16,16 @@ spring:
     database: Northwind
     uri: mongodb://mongoadmin:123Mongo@127.0.0.1:28017/?authSource=admin&authMechanism=SCRAM-SHA-1
           
+    
+############################################################  
+ APPID: c025ef7501012873d99a30b78a7d2920
+ weather_service_url: https://api.openweathermap.org/data/2.5/forecast
+ ############################################################
+ 
 logging:
   level:
     root: INFO
     com.northwind.northwind: DEBUG
     #org.springframework.jdbc.core.JdbcTemplate: DEBUG
-    #org.springframework.jdbc.core.StatementCreatorUtils: TRACE    
+    #org.springframework.jdbc.core.StatementCreatorUtils: TRACE
+    
