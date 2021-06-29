@@ -1,5 +1,7 @@
 package com.northwind.northwind.config;
 
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 @Configuration
 public class ConfigDatasource {
@@ -35,17 +39,15 @@ public class ConfigDatasource {
 	} 
 	
 	@Bean(name = "dataSource")
-	public DataSource dataSource()
-	{
+	public DataSource dataSource() 
+	{	
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
 		dataSource.setDriverClassName(dbDriver);
 		dataSource.setUrl(dbUrl);
 		dataSource.setUsername(dbUsername);
 		dataSource.setPassword(dbPassword);
-		
-		return dataSource;
-	}
+	
+	return dataSource;}
 	
 	@Bean
 	public DataSourceTransactionManager transactionManager()

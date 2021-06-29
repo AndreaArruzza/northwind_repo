@@ -1,11 +1,19 @@
 package com.northwind.northwind.utils;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
+
+import javax.swing.text.Utilities;
+
 import org.apache.commons.io.Charsets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Utils {
+	private static Utils utils;
 	
 	public static String toJson(Object o)
 	{	
@@ -19,6 +27,30 @@ public class Utils {
 		{
 			throw new RuntimeException(e);
 		} 
+	}
+	
+	
+	private Utils() {
+	}
+	
+	public static Utils getInstance() {
+		if (utils == null)
+			utils = new Utils();
+		return utils;
+	}
+	
+	public String readTxtFromClasspath(String path) {
+	    InputStream is = getClass().getResourceAsStream(path);
+	    String result = null;
+	    if (is != null) {
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+	        result = reader.lines().collect(Collectors.joining(System.lineSeparator()));
+	    }
+		return result;
+	}
+	
+	public static final String readQuery(String query) {
+		return Utils.getInstance().readTxtFromClasspath(query);
 	}
 	
 }

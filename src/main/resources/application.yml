@@ -5,9 +5,9 @@ spring:
       active: local
  datasource:
       driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-      url: jdbc:sqlserver://127.0.0.1:1433;databaseName=Notherwind;integratedSecurity=true;
-      username: WebClient
-      password: 340$Uuxwp7Mcxo7Khy
+      url: jdbc:sqlserver://127.0.0.1:1433;database=Northwind;loginTimeout=30;
+      username: WebClient1
+      password: 123_Stella
       
  data:
   mongodb:

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.northwind.northwind.assembler.WeatherAssembler;
 import com.northwind.northwind.exception.WeatherException;
 import com.northwind.northwind.model.WeatherResponse;
-import com.northwind.northwind.repository.CustomersRepository;
+import com.northwind.northwind.mongo.repository.CustomersMongoRepository;
 import com.northwind.northwind.resource.WeatherResource;
 import com.northwind.northwind.resttemplate.WeatherRestTemplate;
 
@@ -23,7 +23,7 @@ public class WeatherService {
 
 	
 	@Autowired
-	CustomersRepository repo;
+	CustomersMongoRepository repo;
 	
 	@Autowired
 	WeatherRestTemplate template;
@@ -32,7 +32,7 @@ public class WeatherService {
 	WeatherAssembler assembler;
 
 	
-	//by city name
+	//by city name AUTOTHENTICATION + MONGODB
 	public List<WeatherResource> getWeatherByCustomerID(String customerID) throws WeatherException{
 		logger.info("[getWeatherByCustomerID] - [START] ---- customerID:  {}",customerID);
 		String cityCustomer = repo.findByCustomerID(customerID).getCity();

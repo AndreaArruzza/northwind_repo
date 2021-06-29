@@ -1,0 +1,2 @@
+SELECT MAX(OrderID)
+FROM Orders

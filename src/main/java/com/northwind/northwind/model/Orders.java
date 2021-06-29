@@ -1,17 +1,20 @@
 package com.northwind.northwind.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(value="Orders")
 public class Orders {
-	 private String OrderID;
+	 private ObjectId _id;
+	 private Integer OrderID;
 	 private String CustomerID;
 	 private String EmployeeID;
-	 private LocalDate  OrderDate;
-	 private LocalDate RequiredDate;
-	 private LocalDate ShippedDate;
+	 private LocalDateTime  OrderDate;
+	 private LocalDateTime RequiredDate;
+	 private LocalDateTime ShippedDate;
 	 private Double Freight;
 	 private String ShipVia;
 	 private String ShipName;
@@ -23,10 +26,10 @@ public class Orders {
 	 
 	 
 	 
-	public String getOrderID() {
+	public Integer getOrderID() {
 		return OrderID;
 	}
-	public void setOrderID(String orderID) {
+	public void setOrderID(Integer orderID) {
 		OrderID = orderID;
 	}
 	public String getCustomerID() {
@@ -41,22 +44,22 @@ public class Orders {
 	public void setEmployeeID(String employeeID) {
 		EmployeeID = employeeID;
 	}
-	public LocalDate getOrderDate() {
+	public LocalDateTime getOrderDate() {
 		return OrderDate;
 	}
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(LocalDateTime orderDate) {
 		OrderDate = orderDate;
 	}
-	public LocalDate getRequiredDate() {
+	public LocalDateTime getRequiredDate() {
 		return RequiredDate;
 	}
-	public void setRequiredDate(LocalDate requiredDate) {
+	public void setRequiredDate(LocalDateTime requiredDate) {
 		RequiredDate = requiredDate;
 	}
-	public LocalDate getShippedDate() {
+	public LocalDateTime getShippedDate() {
 		return ShippedDate;
 	}
-	public void setShippedDate(LocalDate shippedDate) {
+	public void setShippedDate(LocalDateTime shippedDate) {
 		ShippedDate = shippedDate;
 	}
 	public String getShipVia() {

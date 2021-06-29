@@ -1,19 +1,19 @@
 package com.northwind.northwind.resource;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ShipInformationOrders {
 	 private String shipName;
 	 private String shipCity;
 	 private String shipPostalCode;
 	 private String shipCountry;
-	 private LocalDate shippedDate;
+	 private LocalDateTime shippedDate;
 	 
 	 
-	public LocalDate getShippedDate() {
+	public LocalDateTime getShippedDate() {
 		return shippedDate;
 	}
-	public void setShippedDate(LocalDate shippedDate) {
+	public void setShippedDate(LocalDateTime shippedDate) {
 		this.shippedDate = shippedDate;
 	}
 	public String getShipName() {

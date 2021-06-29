@@ -26,6 +26,7 @@ public class OrdersAssembler {
         orderResource.setOrderDate(orders.getOrderDate());
         orderResource.setFreight(orders.getFreight());
         orderResource.setRequiredDate(orders.getOrderDate());
+        orderResource.setCustomerID(orders.getCustomerID());
         
         ship.setShipCity(orders.getShipCity());
         ship.setShipCountry(orders.getShipCountry());

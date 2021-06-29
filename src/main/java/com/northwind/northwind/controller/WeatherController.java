@@ -74,7 +74,7 @@ public class WeatherController {
         return listWeatherResource;
     }
     
-    @ApiOperation(value = "Return weather next 5 days by latitudine and long")
+    @ApiOperation(value = "Return weather next 5 days by latitude and longitude")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
             @ApiResponse(code = 401, message = "not authorized!"),
