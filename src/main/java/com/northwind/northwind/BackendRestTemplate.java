@@ -53,7 +53,7 @@ public class BackendRestTemplate {
 //		}
 //	}
 	
-	public String get(Map<String, String> body, String url) throws WeatherException {
+	public String get(Map<String, Object> body, String url) throws WeatherException {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String currentToken = generateToken();
@@ -61,7 +61,7 @@ public class BackendRestTemplate {
 		logger.info("[@BackendRestTemplate {} ------ [START]", currentToken);
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
-		for (Map.Entry<String, String> entry : body.entrySet()) {
+		for (Map.Entry<String, Object> entry : body.entrySet()) {
 		    builder.queryParam(entry.getKey(), entry.getValue());
 		}
 		

@@ -30,9 +30,9 @@ public class WeatherAssembler {
 		 Double feelLike 	= listWeather.getMainWeather().getFeelsLike();
 		 Integer humidity 	= listWeather.getMainWeather().getHumidity();
 
-		 String descrWeather = "Today ".concat(dateTime.toString()).concat(" in ").concat(cityName).concat(" , ").concat(main).concat(" with ").concat(description)
-				 					   .concat(" . The max temperature is ").concat(String.valueOf(tempMax)).concat(" and min temperature ").concat(String.valueOf(tempMin))
-				 					   .concat(" . Feel like is ").concat(String.valueOf(feelLike)).concat(" and humidity is ").concat(String.valueOf(humidity));
+		 String descrWeather = "In the date, ".concat(dateTime.toString()).concat(" in ").concat(cityName).concat(" . ").concat(main).concat(" with ").concat(description)
+				 					   .concat(" . The max temperature is ").concat(String.valueOf(tempMax)).concat("°C and min temperature ").concat(String.valueOf(tempMin))
+				 					   .concat("°C . Feel like is ").concat(String.valueOf(feelLike)).concat("°C and humidity is ").concat(String.valueOf(humidity).concat(" kg/m³."));
 		 
 		 
 		 resource.setDate(dateTime);

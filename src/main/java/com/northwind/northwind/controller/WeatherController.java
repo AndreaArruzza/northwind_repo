@@ -45,6 +45,21 @@ public class WeatherController {
         return listWeatherResource;
     }
 	  
+    @ApiOperation(value = "Return weather next 5 days by city id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!") })
+    @GetMapping("/{cityId}")
+    public List<WeatherResource> getWeatherByCityID(@RequestParam("cityID") String cityID) throws WeatherException {
+    	logger.info("[getWeatherByCityName] - [START] ---- cityName: {}", cityID);
+        List<WeatherResource> listWeatherResource = service.getWeatherByCityID(cityID);
+        logger.info("[getWeatherByCityName] - [END]");
+        return listWeatherResource;
+    }
+    
+    
     @ApiOperation(value = "Return weather next 5 days by city name")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK"),
@@ -56,6 +71,21 @@ public class WeatherController {
     	logger.info("[getWeatherByCityName] - [START] ---- cityName: {}", cityName);
         List<WeatherResource> listWeatherResource = service.getWeatherByCityName(cityName);
         logger.info("[getWeatherByCityName] - [END]");
+        return listWeatherResource;
+    }
+    
+    @ApiOperation(value = "Return weather next 5 days by latitudine and long")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "not authorized!"),
+            @ApiResponse(code = 403, message = "forbidden!!!"),
+            @ApiResponse(code = 404, message = "not found!!!") })
+    @GetMapping("/{lat}/{lon}")
+    public List<WeatherResource> getWeatherByLatLon(@RequestParam("lat") Double lat,
+    		@										 RequestParam("lon") Double lon) throws WeatherException {
+    	logger.info("[getWeatherByLatLon] - [START] ---- lat: {} ---- lon: {}", lat, lon);
+        List<WeatherResource> listWeatherResource = service.getWeatherByLatLon(lat, lon);
+        logger.info("[getWeatherByLatLon] - [END]");
         return listWeatherResource;
     }
 

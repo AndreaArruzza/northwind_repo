@@ -28,9 +28,8 @@ public class WeatherRestTemplate {
 	@Autowired
 	BackendRestTemplate backendRestTemplate;
 	
-	public WeatherResponse getWeatherResponse(String param) throws WeatherException {
-		Map<String,String> params = new HashMap<>();
-		params.put("q", param);
+	public WeatherResponse getWeatherResponse(Map<String,Object> params) throws WeatherException {
+		
 		params.put("units", "metric");
 		params.put("APPID", appId);
 		
