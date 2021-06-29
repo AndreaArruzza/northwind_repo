@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
 import com.northwind.northwind.model.Orders;
 import com.northwind.northwind.resource.OrdersResource;
 import com.northwind.northwind.resource.ShipInformationOrders;
-import com.northwind.northwind.service.OrdersService;
 
 @Component
 public class OrdersAssembler {
 
-	private static final Logger logger = LoggerFactory.getLogger(OrdersService.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrdersAssembler.class);
 	
     public OrdersResource toResource (Orders orders) {
     	logger.info("[toResource] - [START]");

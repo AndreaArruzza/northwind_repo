@@ -34,7 +34,7 @@ public class WeatherService {
 		logger.info("[getWeatherByCustomerID] - [START] ---- customerID:  {}",customerID);
 		String cityCustomer = repo.findByCustomerID(customerID).getCity();
 		List<WeatherResource> weatherResource = getResponse(cityCustomer);
-		logger.info("[getWeatherByCityName] - [END]");
+		logger.info("[getWeatherByCustomerID] - [END]");
 		return weatherResource;
 	}
 

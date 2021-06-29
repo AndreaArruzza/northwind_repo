@@ -33,7 +33,7 @@ public class OrdersController {
 	@Autowired
 	OrdersAssembler assembler;
 	
-	@ApiOperation(value = "return order by authentication")
+	@ApiOperation(value = "return orders by authentication")
 	@ApiResponses(value = {
 	            @ApiResponse(code = 200, message = "Success|OK"),
 	            @ApiResponse(code = 401, message = "not authorized!"),
@@ -41,27 +41,27 @@ public class OrdersController {
 	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping
 	public List<OrdersResource> getOrders() throws OrdersException {
-		logger.info("[getWeatherByCityID] - [START]");
+		logger.info("[getOrders] - [START]");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		List<OrdersResource> resource = service.getOrdersByCustomerID(authentication.getName());
-		logger.info("[getWeatherByCityID] - [END]");
+		logger.info("[getOrders] - [END]");
 		return resource;
 	}
 	
 
-	@ApiOperation(value = "return order by customer id ")
+	@ApiOperation(value = "return orders by customer id ")
 	@ApiResponses(value = {
 	            @ApiResponse(code = 200, message = "Success|OK"),
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
 	@GetMapping("/{customerID}")
-	public List<OrdersResource> getOrders(@RequestParam("customerID") String customerID) throws OrdersException {
-		logger.info("[getWeatherByCityID] - [START]");
+	public List<OrdersResource> getOrdersByCustomerID(@RequestParam("customerID") String customerID) throws OrdersException {
+		logger.info("[getOrdersByCustomerID] - [START]");
 
 		List<OrdersResource> resource = service.getOrdersByCustomerID(customerID);
-		logger.info("[getWeatherByCityID] - [END]");
+		logger.info("[getOrdersByCustomerID] - [END]");
 		return resource;
 	}
 }

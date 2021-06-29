@@ -27,14 +27,10 @@ public class OrdersService  {
 	
 	public List<OrdersResource> getOrdersByCustomerID(String customerID) throws OrdersException {
 		logger.info("[getOrderByCustomerID] - [START] ---- customerID:  {}",customerID);
-		Orders order = new Orders();
-		order.setCustomerID(customerID);
 		
-		logger.info("[findByCustomerID] - [START] ---- customerID:  {}", customerID);
-		Optional<List<Orders>> ordersOptional= Optional.ofNullable(repo.findByCustomerID(order.getCustomerID()));
-		
-		List<Orders> listOrders =  ordersOptional.orElse(new ArrayList<>());
-		logger.info("[findByCustomerID] - [END] ---- listOrders:  {}", listOrders);
+		logger.info("[findByCustomerID --- Mongodb] - [START] ---- customerID:  {}", customerID);
+		List<Orders> listOrders =  repo.findByCustomerID(customerID);
+		logger.info("[findByCustomerID --- Mongodb] - [END] ---- listOrders:  {}", listOrders);
 		List<OrdersResource> resource = new ArrayList<>();
 		
 		if(!listOrders.isEmpty()) {

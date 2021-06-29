@@ -21,44 +21,44 @@ import java.util.Optional;
 @Component
 public class BackendRestTemplate {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RestTemplate.class);
+	private static final Logger logger = LoggerFactory.getLogger(BackendRestTemplate.class);
 	
-	public String post(Map<String, String> body, String url) throws WeatherException {
-		RestTemplate restTemplate = new RestTemplate();
-		
-		String currentToken = generateToken();
-		Date startDate = new Date();
-		logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate UTF8 new.....: " + url + "...");
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		
-		HttpEntity<?> entity = new HttpEntity<>(Utils.toJson(body),headers);
-		logger.info("chiamata restTemplate con entity " + entity + " url " + url);
-		try {
-			ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.POST,entity, Object.class);
-			Optional<Object> responseOptional = Optional.ofNullable(response.getBody());
-			Date endDate = new Date();
-			logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate: " + url + " OK in ["+ (endDate.getTime() - startDate.getTime()) / 1 + "]ms");
-			
-			Object responseObj = responseOptional.orElse(null);
-			String resultJson = "";
-			if(responseObj != null) {
-				resultJson = Utils.toJson(responseObj);
-			}
-			return resultJson;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			throw new WeatherException("Errore durante la chiamata al servizio con url ".concat(url).concat("body: ").concat(Utils.toJson(body))); 
-		}
-	}
+//	public String post(Map<String, String> body, String url) throws WeatherException {
+//		RestTemplate restTemplate = new RestTemplate();
+//		
+//		String currentToken = generateToken();
+//		Date startDate = new Date();
+//		logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate UTF8 new.....: " + url + "...");
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+//		
+//		HttpEntity<?> entity = new HttpEntity<>(Utils.toJson(body),headers);
+//		logger.info("chiamata restTemplate con entity " + entity + " url " + url);
+//		try {
+//			ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.POST,entity, Object.class);
+//			Optional<Object> responseOptional = Optional.ofNullable(response.getBody());
+//			Date endDate = new Date();
+//			logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate: " + url + " OK in ["+ (endDate.getTime() - startDate.getTime()) / 1 + "]ms");
+//			
+//			Object responseObj = responseOptional.orElse(null);
+//			String resultJson = "";
+//			if(responseObj != null) {
+//				resultJson = Utils.toJson(responseObj);
+//			}
+//			return resultJson;
+//		} catch (Exception e) {
+//			logger.error(e.getMessage());
+//			throw new WeatherException("Errore durante la chiamata al servizio con url ".concat(url).concat("body: ").concat(Utils.toJson(body))); 
+//		}
+//	}
 	
 	public String get(Map<String, String> body, String url) throws WeatherException {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String currentToken = generateToken();
 		Date startDate = new Date();
-		logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate UTF8 new.....: " + url + "...");
+		logger.info("[@BackendRestTemplate {} ------ [START]", currentToken);
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
 		for (Map.Entry<String, String> entry : body.entrySet()) {
@@ -69,19 +69,19 @@ public class BackendRestTemplate {
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 		
 		HttpEntity<?> entity = new HttpEntity<>(null ,headers);	
-		logger.info("chiamata restTemplate con entity " + entity + " url " + url);
+		logger.info("[URL {}] -----------  [ENTITY {}]  ",url, entity);
 		try {
 			ResponseEntity<?> response = restTemplate.exchange(builder.toUriString(),HttpMethod.GET, entity,Object.class,body);
 			
 			Optional<Object> responseOptional = Optional.ofNullable(response.getBody());
 			Date endDate = new Date();
 			
-			logger.info("[@BackendRestTemplate" + currentToken + "] " + "chiamata al backend BackendRestTemplate: " + url + " OK in ["+ (endDate.getTime() - startDate.getTime()) / 1 + "]ms");
 			Object responseObj = responseOptional.orElse(null);
 			String resultJson = "";
 			if(responseObj != null) {
 				resultJson = Utils.toJson(responseObj);
 			}
+			logger.info("[@BackendRestTemplate {} ------ [END]  ----- RESULT{} ---------- {} ms", currentToken, resultJson, (endDate.getTime() - startDate.getTime()) / 1 );
 			return resultJson;
 		} catch (Exception e) {
 			logger.error(e.getMessage());

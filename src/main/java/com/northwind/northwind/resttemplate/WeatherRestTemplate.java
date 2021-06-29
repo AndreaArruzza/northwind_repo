@@ -34,10 +34,9 @@ public class WeatherRestTemplate {
 		params.put("units", "metric");
 		params.put("APPID", appId);
 		
-		
-		logger.info("chiamata a backendRestTemplate con url :" , url);
+		logger.info("[getWeatherResponse] - [START] ---- url:  {}" , url);
 		String responseJson = backendRestTemplate.get(params, url);
-		logger.info("controllo response con result: " , responseJson);
+		logger.info("[controllo response] con result: {} ", responseJson);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
@@ -52,6 +51,7 @@ public class WeatherRestTemplate {
 			throw new WeatherException("Errore durante la conversione alla response");
 		}
 		
+		logger.info("[getWeatherResponse] - [END] ---- url:  {}" , url);
 		return listWeather;
 	}
 }
