@@ -1,0 +1,3 @@
+SELECT *
+FROM Roles
+WHERE RoleID = ?

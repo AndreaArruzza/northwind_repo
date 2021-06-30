@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CloudDTO {
+public class Cloud {
 	@JsonProperty("all")
 	private Integer all;
 

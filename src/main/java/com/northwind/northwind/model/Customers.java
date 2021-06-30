@@ -1,87 +1,124 @@
 package com.northwind.northwind.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "Customers")
 public class Customers {
-	 private String CustomerID;
-	 private String CompanyName;
-	 private String ContactName;
-	 private String ContactTitle;
-	 private String Address;
-	 private String City;
-	 private String Region;
-	 private String  PostalCode;
-	 private String Country;
-	 private String Phone;
-	 private String Fax;
-
+	 @Field(name = "CustomerID")
+	 private String customerID;
+	 
+	 @Field(name = "CompanyName")
+	 private String companyName;
+	 
+	 @Field(name = "ContactName")
+	 private String contactName;
+	 
+	 @Field(name = "ContactTitle")
+	 private String contactTitle;
+	 
+	 @Field(name = "Address")
+	 private String address;
+	 
+	 @Field(name = "City")
+	 private String city;
+	 
+	 @Field(name = "Region")
+	 private String region;
+	 
+	 @Field(name = "PostalCode")
+	 private String  postalCode;
+	 
+	 @Field(name = "Country")
+	 private String country;
+	 
+	 @Field(name = "Phone")
+	 private String phone;
+	 
+	 @Field(name = "Fax")
+	 private String fax;
+	 
+	 
+	 private String password;
+	 
+	 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getCustomerID() {
-		return CustomerID;
+		return customerID;
 	}
 	public void setCustomerID(String customerID) {
-		CustomerID = customerID;
+		this.customerID = customerID;
 	}
 	public String getCompanyName() {
-		return CompanyName;
+		return companyName;
 	}
 	public void setCompanyName(String companyName) {
-		CompanyName = companyName;
+		this.companyName = companyName;
 	}
 	public String getContactName() {
-		return ContactName;
+		return contactName;
 	}
 	public void setContactName(String contactName) {
-		ContactName = contactName;
+		this.contactName = contactName;
 	}
 	public String getContactTitle() {
-		return ContactTitle;
+		return contactTitle;
 	}
 	public void setContactTitle(String contactTitle) {
-		ContactTitle = contactTitle;
+		this.contactTitle = contactTitle;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	public String getRegion() {
-		return Region;
+		return region;
 	}
 	public void setRegion(String region) {
-		Region = region;
+		this.region = region;
 	}
 	public String getPostalCode() {
-		return PostalCode;
+		return postalCode;
 	}
 	public void setPostalCode(String postalCode) {
-		PostalCode = postalCode;
+		this.postalCode = postalCode;
 	}
 	public String getCountry() {
-		return Country;
+		return country;
 	}
 	public void setCountry(String country) {
-		Country = country;
+		this.country = country;
 	}
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 	public String getFax() {
-		return Fax;
+		return fax;
 	}
 	public void setFax(String fax) {
-		Fax = fax;
+		this.fax = fax;
 	}
-	 
-	 
+	
+	@Override
+	public String toString() {
+		return "Customers [customerID=" + customerID + ", companyName=" + companyName + ", contactName=" + contactName
+				+ ", contactTitle=" + contactTitle + ", address=" + address + ", city=" + city + ", region=" + region
+				+ ", postalCode=" + postalCode + ", country=" + country + ", phone=" + phone + ", fax=" + fax + "]";
+	}
 }

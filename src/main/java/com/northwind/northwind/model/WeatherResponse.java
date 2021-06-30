@@ -12,9 +12,9 @@ public class WeatherResponse {
 	@JsonProperty("cnt")
 	private String cnt;
 	@JsonProperty("list")	
-	private List<ListWeatherDTO> listWeatherDTO;
+	private List<WeatherList> listWeatherDTO;
 	@JsonProperty("city")	
-	private CityDTO city;
+	private City city;
 	
 	public String getCod() {
 		return cod;
@@ -34,17 +34,17 @@ public class WeatherResponse {
 	public void setCnt(String cnt) {
 		this.cnt = cnt;
 	}
-	public List<ListWeatherDTO> getListWeatherDTO() {
+	public List<WeatherList> getListWeatherDTO() {
 		return listWeatherDTO;
 	}
-	public void setListWeatherDTO(List<ListWeatherDTO> listWeatherDTO) {
+	public void setListWeatherDTO(List<WeatherList> listWeatherDTO) {
 		this.listWeatherDTO = listWeatherDTO;
 	}
 	
-	public CityDTO getCity() {
+	public City getCity() {
 		return city;
 	}
-	public void setCity(CityDTO city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 	

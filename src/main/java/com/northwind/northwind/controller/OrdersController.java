@@ -2,7 +2,6 @@ package com.northwind.northwind.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.northwind.northwind.assembler.OrdersAssembler;
 import com.northwind.northwind.exception.OrdersException;
-import com.northwind.northwind.model.OrdersDTO;
+import com.northwind.northwind.model.Orders;
 import com.northwind.northwind.resource.OrdersResource;
 import com.northwind.northwind.service.OrdersService;
 
@@ -50,7 +49,7 @@ public class OrdersController {
 	public List<OrdersResource> getOrders() throws OrdersException {
 		logger.info("[getOrders] - [START]");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+		
 		List<OrdersResource> resource = service.getOrdersByCustomerID(authentication.getName());
 		logger.info("[getOrders] - [END]");
 		return resource;
@@ -114,7 +113,7 @@ public class OrdersController {
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
 	@PostMapping
-	public ResponseEntity<String> insertNewOrder(@RequestBody OrdersDTO createOrdersDTO) throws OrdersException  {
+	public ResponseEntity<String> insertNewOrder(@RequestBody Orders createOrdersDTO) throws OrdersException  {
 		logger.info("[insertNewOrder] - [START]");
 		service.insertNewOrder(createOrdersDTO);
 		logger.info("[insertNewOrder] - [END]");

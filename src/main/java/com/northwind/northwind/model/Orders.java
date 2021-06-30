@@ -2,118 +2,141 @@ package com.northwind.northwind.model;
 
 import java.time.LocalDateTime;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value="Orders")
 public class Orders {
-	 private ObjectId _id;
-	 private Integer OrderID;
-	 private String CustomerID;
-	 private String EmployeeID;
-	 private LocalDateTime  OrderDate;
-	 private LocalDateTime RequiredDate;
-	 private LocalDateTime ShippedDate;
-	 private Double Freight;
-	 private String ShipVia;
-	 private String ShipName;
-	 private String ShipAddress;
-	 private String ShipCity;
-	 private String ShipRegion;
-	 private String ShipPostalCode;
-	 private String ShipCountry;
+	 @Field(name = "OrderID")
+	 private Integer orderID;
+	 @Field(name = "CustomerID")
+	 private String customerID;
+	 @Field(name = "EmployeeID")
+	 private String employeeID;
+	 @Field(name = "OrderDate")
+	 private LocalDateTime  orderDate;
+	 @Field(name = "RequiredDate")
+	 private LocalDateTime requiredDate;
+	 @Field(name = "ShippedDate")
+	 private LocalDateTime shippedDate;
+	 @Field(name = "Freight")
+	 private Double freight;
+	 @Field(name = "ShipVia")
+	 private String shipVia;
+	 @Field(name = "ShipName")
+	 private String shipName;
+	 @Field(name = "ShipAddress")
+	 private String shipAddress;
+	 @Field(name = "ShipCity")
+	 private String shipCity;
+	 @Field(name = "ShipRegion")
+	 private String shipRegion;
+	 @Field(name = "ShipPostalCode")
+	 private String shipPostalCode;
+	 @Field(name = "ShipCountry")
+	 private String shipCountry;
 	 
+	 private Boolean newOrder;
 	 
-	 
+
+	public Boolean getNewOrder() {
+		return newOrder;
+	}
+	public void setNewOrder(Boolean newOrder) {
+		this.newOrder = newOrder;
+	}
 	public Integer getOrderID() {
-		return OrderID;
+		return orderID;
 	}
 	public void setOrderID(Integer orderID) {
-		OrderID = orderID;
+		this.orderID = orderID;
 	}
 	public String getCustomerID() {
-		return CustomerID;
+		return customerID;
 	}
-	public void setCustomerID(String CustomerID) {
-		this.CustomerID = CustomerID;
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
 	}
 	public String getEmployeeID() {
-		return EmployeeID;
+		return employeeID;
 	}
 	public void setEmployeeID(String employeeID) {
-		EmployeeID = employeeID;
+		this.employeeID = employeeID;
 	}
 	public LocalDateTime getOrderDate() {
-		return OrderDate;
+		return orderDate;
 	}
 	public void setOrderDate(LocalDateTime orderDate) {
-		OrderDate = orderDate;
+		this.orderDate = orderDate;
 	}
 	public LocalDateTime getRequiredDate() {
-		return RequiredDate;
+		return requiredDate;
 	}
 	public void setRequiredDate(LocalDateTime requiredDate) {
-		RequiredDate = requiredDate;
+		this.requiredDate = requiredDate;
 	}
 	public LocalDateTime getShippedDate() {
-		return ShippedDate;
+		return shippedDate;
 	}
 	public void setShippedDate(LocalDateTime shippedDate) {
-		ShippedDate = shippedDate;
-	}
-	public String getShipVia() {
-		return ShipVia;
-	}
-	public void setShipVia(String shipVia) {
-		ShipVia = shipVia;
+		this.shippedDate = shippedDate;
 	}
 	public Double getFreight() {
-		return Freight;
+		return freight;
 	}
 	public void setFreight(Double freight) {
-		Freight = freight;
+		this.freight = freight;
+	}
+	public String getShipVia() {
+		return shipVia;
+	}
+	public void setShipVia(String shipVia) {
+		this.shipVia = shipVia;
 	}
 	public String getShipName() {
-		return ShipName;
+		return shipName;
 	}
 	public void setShipName(String shipName) {
-		ShipName = shipName;
+		this.shipName = shipName;
 	}
 	public String getShipAddress() {
-		return ShipAddress;
+		return shipAddress;
 	}
 	public void setShipAddress(String shipAddress) {
-		ShipAddress = shipAddress;
+		this.shipAddress = shipAddress;
 	}
 	public String getShipCity() {
-		return ShipCity;
+		return shipCity;
 	}
 	public void setShipCity(String shipCity) {
-		ShipCity = shipCity;
+		this.shipCity = shipCity;
 	}
 	public String getShipRegion() {
-		return ShipRegion;
+		return shipRegion;
 	}
 	public void setShipRegion(String shipRegion) {
-		ShipRegion = shipRegion;
+		this.shipRegion = shipRegion;
 	}
 	public String getShipPostalCode() {
-		return ShipPostalCode;
+		return shipPostalCode;
 	}
 	public void setShipPostalCode(String shipPostalCode) {
-		ShipPostalCode = shipPostalCode;
+		this.shipPostalCode = shipPostalCode;
 	}
 	public String getShipCountry() {
-		return ShipCountry;
+		return shipCountry;
 	}
 	public void setShipCountry(String shipCountry) {
-		ShipCountry = shipCountry;
+		this.shipCountry = shipCountry;
 	}
-	 
-	 
-	 
-	 
-	 
+	
+	@Override
+	public String toString() {
+		return "Orders [orderID=" + orderID + ", customerID=" + customerID + ", employeeID=" + employeeID
+				+ ", orderDate=" + orderDate + ", requiredDate=" + requiredDate + ", shippedDate=" + shippedDate
+				+ ", freight=" + freight + ", shipVia=" + shipVia + ", shipName=" + shipName + ", shipAddress="
+				+ shipAddress + ", shipCity=" + shipCity + ", shipRegion=" + shipRegion + ", shipPostalCode="
+				+ shipPostalCode + ", shipCountry=" + shipCountry + "]";
+	}
 	 
 }

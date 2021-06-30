@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListWeatherDTO {
+public class WeatherList {
 	@JsonProperty("dt")
 	private String data;
 	@JsonProperty("dt_txt")
@@ -14,19 +14,19 @@ public class ListWeatherDTO {
 	@JsonProperty("pop")
 	private Double pop;
 	@JsonProperty("main")
-	private MainWeatherDTO mainWeather;
+	private WeatherMain mainWeather;
 	@JsonProperty("weather")
-	private List<WeatherDTO> weather;
+	private List<Weather> weather;
 	@JsonProperty("clouds")
-	private CloudDTO clouds;
+	private Cloud clouds;
 	@JsonProperty("wind")
-	private WindDTO wind;
+	private Wind wind;
 	@JsonProperty("rain")
-	private RainDTO rain;
+	private Rain rain;
 	@JsonProperty("snow")
-	private SnowDTO snow;
+	private Snow snow;
 	@JsonProperty("sys")
-	private DayDTO pod;
+	private Day pod;
 	
 	public String getData() {
 		return data;
@@ -60,59 +60,59 @@ public class ListWeatherDTO {
 		this.pop = pop;
 	}
 
-	public MainWeatherDTO getMainWeather() {
+	public WeatherMain getMainWeather() {
 		return mainWeather;
 	}
 
-	public void setMainWeather(MainWeatherDTO mainWeather) {
+	public void setMainWeather(WeatherMain mainWeather) {
 		this.mainWeather = mainWeather;
 	}
 
-	public  List<WeatherDTO> getWeather() {
+	public  List<Weather> getWeather() {
 		return weather;
 	}
 
-	public void setWeather( List<WeatherDTO> weather) {
+	public void setWeather( List<Weather> weather) {
 		this.weather = weather;
 	}
 
-	public CloudDTO getClouds() {
+	public Cloud getClouds() {
 		return clouds;
 	}
 
-	public void setClouds(CloudDTO clouds) {
+	public void setClouds(Cloud clouds) {
 		this.clouds = clouds;
 	}
 
-	public WindDTO getWind() {
+	public Wind getWind() {
 		return wind;
 	}
 
-	public void setWind(WindDTO wind) {
+	public void setWind(Wind wind) {
 		this.wind = wind;
 	}
 
-	public RainDTO getRain() {
+	public Rain getRain() {
 		return rain;
 	}
 
-	public void setRain(RainDTO rain) {
+	public void setRain(Rain rain) {
 		this.rain = rain;
 	}
 
-	public SnowDTO getSnow() {
+	public Snow getSnow() {
 		return snow;
 	}
 
-	public void setSnow(SnowDTO snow) {
+	public void setSnow(Snow snow) {
 		this.snow = snow;
 	}
 
-	public DayDTO getPod() {
+	public Day getPod() {
 		return pod;
 	}
 
-	public void setPod(DayDTO pod) {
+	public void setPod(Day pod) {
 		this.pod = pod;
 	}
 

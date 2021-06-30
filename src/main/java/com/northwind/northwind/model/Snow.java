@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SnowDTO {
+public class Snow {
 	@JsonProperty("3h")
 	private Double volumSnow;
 

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.northwind.northwind.assembler.OrdersAssembler;
 import com.northwind.northwind.exception.OrdersException;
 import com.northwind.northwind.model.Orders;
-import com.northwind.northwind.model.OrdersDTO;
 import com.northwind.northwind.mongo.repository.OrdersMongoRepository;
 import com.northwind.northwind.repository.OrdersRepository;
 import com.northwind.northwind.resource.OrdersResource;
@@ -106,82 +105,83 @@ public class OrdersService  {
 	}
 	
 	//insert new order o copy
-	public void insertNewOrder(OrdersDTO createOrdersDTO) throws OrdersException {
-		logger.info("[insertNewOrder] - [START] ---- createOrdersDTO:  {}",createOrdersDTO);
-		List<OrdersDTO> orders = new ArrayList<>();
+	public void insertNewOrder(Orders createOrders) throws OrdersException {
+		logger.info("[insertNewOrder] - [START] ---- createOrders:  {}",createOrders);
+		List<Orders> orders = new ArrayList<>();
 		
-		if(!createOrdersDTO.getNewOrder()) {
-			prepareCopyOrder(createOrdersDTO, orders);
+		//verifico se è un nuovo ordine o no
+		if(!createOrders.getNewOrder()) {
+			prepareCopyOrder(createOrders, orders);
 		}
 		else {
-			orders.add(createOrdersDTO);
+			orders.add(createOrders);
 		}
 		logger.info("[repo.insert] - [START] ---- orders:  {}", orders);
 		boolean execSqlServer = repo.insert(orders);
 		logger.info("[repo.insert] - [END] ---- execSqlServer:  {}", execSqlServer);
-		if(execSqlServer) {
-			insertNewRecordMongo(orders);
-		}
+//		if(execSqlServer) {
+//			insertNewRecordMongo(orders);
+//		}
 		logger.info("[insertNewOrder] - [END]");
 		
 	}
 	
 	
-	private void prepareCopyOrder(OrdersDTO createOrdersDTO, List<OrdersDTO> orders) throws OrdersException {
-		logger.info("[findByCustomerID --- Mongodb] - [START] ---- orderID:  {}", createOrdersDTO.getOrderID());
-		Orders copyOrder = repoMongo.findByOrderID(createOrdersDTO.getOrderID());
+	private void prepareCopyOrder(Orders createOrders, List<Orders> orders) throws OrdersException {
+		logger.info("[findByCustomerID --- Mongodb] - [START] ---- orderID:  {}", createOrders.getOrderID());
+		Orders copyOrder = repoMongo.findByOrderID(createOrders.getOrderID());
 		logger.info("[findByCustomerID --- Mongodb] - [END] ---- copyOrder:  {}", copyOrder);
 		
 		if(copyOrder != null){
-			createOrdersDTO.setOrderDate(LocalDateTime.now());
-			createOrdersDTO.setRequiredDate(LocalDateTime.now());
-			createOrdersDTO.setShippedDate(null);
-			createOrdersDTO.setCustomerID(copyOrder.getCustomerID());
-			createOrdersDTO.setEmployeeID(copyOrder.getEmployeeID());
-			createOrdersDTO.setFreight(copyOrder.getFreight());
-			createOrdersDTO.setOrderID(copyOrder.getOrderID());
-			createOrdersDTO.setShipAddress(copyOrder.getShipAddress());
-			createOrdersDTO.setShipCity(copyOrder.getShipCity());
-			createOrdersDTO.setShipCountry(copyOrder.getShipCountry());
-			createOrdersDTO.setShipName(copyOrder.getShipName());
-			createOrdersDTO.setShipPostalCode(copyOrder.getShipPostalCode());
-			createOrdersDTO.setShipRegion(copyOrder.getShipRegion());
-			createOrdersDTO.setShipVia(copyOrder.getShipVia());
+			createOrders.setOrderDate(LocalDateTime.now());
+			createOrders.setRequiredDate(LocalDateTime.now());
+			createOrders.setShippedDate(null);
+			createOrders.setCustomerID(copyOrder.getCustomerID());
+			createOrders.setEmployeeID(copyOrder.getEmployeeID());
+			createOrders.setFreight(copyOrder.getFreight());
+			createOrders.setOrderID(copyOrder.getOrderID());
+			createOrders.setShipAddress(copyOrder.getShipAddress());
+			createOrders.setShipCity(copyOrder.getShipCity());
+			createOrders.setShipCountry(copyOrder.getShipCountry());
+			createOrders.setShipName(copyOrder.getShipName());
+			createOrders.setShipPostalCode(copyOrder.getShipPostalCode());
+			createOrders.setShipRegion(copyOrder.getShipRegion());
+			createOrders.setShipVia(copyOrder.getShipVia());
 			
-			orders.add(createOrdersDTO);
+			orders.add(createOrders);
 		}
 		else {
-			logger.error("  non vi sono ordini associati al order ID indicato :  {}", createOrdersDTO.getOrderID());
-			throw new OrdersException(" non vi sono ordini associati al customer ID indicato : ".concat(String.valueOf(createOrdersDTO.getOrderID())));
+			logger.error("  non vi sono ordini associati al order ID indicato :  {}", createOrders.getOrderID());
+			throw new OrdersException(" non vi sono ordini associati al customer ID indicato : ".concat(String.valueOf(createOrders.getOrderID())));
 		}
 	}
 
-	private void insertNewRecordMongo(List<OrdersDTO> orders) {
-		orders.stream().forEach(p -> {
-			Orders order = new Orders();
-			order.setOrderDate(p.getOrderDate());
-			order.setRequiredDate(p.getRequiredDate());
-			order.setShippedDate(p.getShippedDate());
-			order.setCustomerID(p.getCustomerID());
-			order.setEmployeeID(p.getEmployeeID());
-			order.setFreight(p.getFreight());
-			order.setShipAddress(p.getShipAddress());
-			order.setShipCity(p.getShipCity());
-			order.setShipCountry(p.getShipCountry());
-			order.setShipName(p.getShipName());
-			order.setShipPostalCode(p.getShipPostalCode());
-			order.setShipRegion(p.getShipRegion());
-			order.setShipVia(p.getShipVia());
-			try {
-				order.setOrderID(repo.getLastOrderID());
-			} catch (OrdersException e) {
-				logger.error(e.getMessage());
-			}
-			
-			repoMongo.save(order);
-		});
-		
-	}
+//	private void insertNewRecordMongo(List<Orders> orders) {
+//		orders.stream().forEach(p -> {
+//			Orders order = new Orders();
+//			order.setOrderDate(p.getOrderDate());
+//			order.setRequiredDate(p.getRequiredDate());
+//			order.setShippedDate(p.getShippedDate());
+//			order.setCustomerID(p.getCustomerID());
+//			order.setEmployeeID(p.getEmployeeID());
+//			order.setFreight(p.getFreight());
+//			order.setShipAddress(p.getShipAddress());
+//			order.setShipCity(p.getShipCity());
+//			order.setShipCountry(p.getShipCountry());
+//			order.setShipName(p.getShipName());
+//			order.setShipPostalCode(p.getShipPostalCode());
+//			order.setShipRegion(p.getShipRegion());
+//			order.setShipVia(p.getShipVia());
+//			try {
+//				order.setOrderID(repo.getLastOrderID());
+//			} catch (OrdersException e) {
+//				logger.error(e.getMessage());
+//			}
+//			
+//			repoMongo.save(order);
+//		});
+//		
+//	}
 
 	
 }

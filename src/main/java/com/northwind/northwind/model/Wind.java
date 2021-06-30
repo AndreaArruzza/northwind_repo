@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WindDTO {
+public class Wind {
    @JsonProperty("speed")
    private Double  speed;
    @JsonProperty("deg")

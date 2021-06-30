@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MainWeatherDTO {
+public class WeatherMain {
 	@JsonProperty("temp")
     private Double temp;
 	@JsonProperty("feels_like")

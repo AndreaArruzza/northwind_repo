@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CoordDTO {
+public class Coord {
 	@JsonProperty("lat")
 	private Double lat;
 	@JsonProperty("lon")

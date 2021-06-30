@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.northwind.northwind.model.ListWeatherDTO;
+import com.northwind.northwind.model.WeatherList;
 import com.northwind.northwind.resource.WeatherResource;
 
 @Component
@@ -15,7 +15,7 @@ public class WeatherAssembler {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherAssembler.class);
 
 	
-	 public WeatherResource toResource(ListWeatherDTO listWeather, String cityName) {
+	 public WeatherResource toResource(WeatherList listWeather, String cityName) {
 		 logger.info("[toResource] - [START]");
 		 WeatherResource resource = new WeatherResource();
 		 String str = listWeather.getDateTxt();

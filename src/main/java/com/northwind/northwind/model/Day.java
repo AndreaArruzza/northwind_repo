@@ -2,7 +2,7 @@ package com.northwind.northwind.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DayDTO {
+public class Day {
 	@JsonProperty("pod")
 	private String partOfDay;
 

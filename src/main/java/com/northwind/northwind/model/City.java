@@ -5,13 +5,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CityDTO {
+public class City {
 	@JsonProperty("id")
     private String id;
 	@JsonProperty("name")
     private String name;
 	@JsonProperty("coord")
-    private List<CoordDTO> coord;
+    private List<Coord> coord;
 	@JsonProperty("sunrise")
     private Timestamp sunrise;
 	@JsonProperty("sunset")
@@ -44,10 +44,10 @@ public class CityDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<CoordDTO> getCoord() {
+	public List<Coord> getCoord() {
 		return coord;
 	}
-	public void setCoord(List<CoordDTO> coord) {
+	public void setCoord(List<Coord> coord) {
 		this.coord = coord;
 	}
 	public String getCountry() {
