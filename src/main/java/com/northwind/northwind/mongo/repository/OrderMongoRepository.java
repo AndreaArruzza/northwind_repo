@@ -6,19 +6,19 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.northwind.northwind.model.Orders;
+import com.northwind.northwind.model.Order;
 
 @Repository
-public interface OrdersMongoRepository extends MongoRepository<Orders, String> {
+public interface OrderMongoRepository extends MongoRepository<Order, String> {
 	
 	@Query("{ 'CustomerID' : ?0 }")
-	public List<Orders> findByCustomerID(String customerID);
+	public List<Order> findByCustomerID(String customerID);
 	
 	@Query("{ 'OrderID' : ?0 }")
-	public Orders findByOrderID(Integer orderID);
+	public Order findByOrderID(Integer orderID);
 
 	@Query("{ 'ShipCountry' : ?0 , 'ShipName' : ?1}")
-	public List<Orders> findByShipCountryShipName(String shipCountry, String shipName);
+	public List<Order> findByShipCountryShipName(String shipCountry, String shipName);
 	
 	
 }

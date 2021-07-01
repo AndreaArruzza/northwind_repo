@@ -2,6 +2,7 @@ package com.northwind.northwind;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.northwind.northwind.exception.WeatherException;
-import com.northwind.northwind.utils.Utils;
-import java.util.Optional;
+import com.northwind.northwind.utils.Util;
 
 @Component
 public class BackendRestTemplate {
@@ -53,7 +52,7 @@ public class BackendRestTemplate {
 //		}
 //	}
 	
-	public String get(Map<String, Object> body, String url) throws WeatherException {
+	public String get(Map<String, Object> body, String url) {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String currentToken = generateToken();
@@ -70,6 +69,7 @@ public class BackendRestTemplate {
 		
 		HttpEntity<?> entity = new HttpEntity<>(null ,headers);	
 		logger.info("[URL {}] -----------  [ENTITY {}]  ",url, entity);
+		String resultJson = "";
 		try {
 			ResponseEntity<?> response = restTemplate.exchange(builder.toUriString(),HttpMethod.GET, entity,Object.class,body);
 			
@@ -77,16 +77,15 @@ public class BackendRestTemplate {
 			Date endDate = new Date();
 			
 			Object responseObj = responseOptional.orElse(null);
-			String resultJson = "";
 			if(responseObj != null) {
-				resultJson = Utils.toJson(responseObj);
+				resultJson = Util.toJson(responseObj);
 			}
 			logger.info("[@BackendRestTemplate {} ------ [END]  ----- RESULT{} ---------- {} ms", currentToken, resultJson, (endDate.getTime() - startDate.getTime()) / 1 );
-			return resultJson;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			throw new WeatherException("Errore durante la chiamata al servizio con url ".concat(builder.toUriString())); 
+			throw new RuntimeException(e.getMessage());
 		}
+		return resultJson;
 	}
 	
 	protected static String generateToken(){

@@ -12,8 +12,8 @@ import org.apache.commons.io.Charsets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Utils {
-	private static Utils utils;
+public class Util {
+	private static Util utils;
 	
 	public static String toJson(Object o)
 	{	
@@ -30,12 +30,12 @@ public class Utils {
 	}
 	
 	
-	private Utils() {
+	private Util() {
 	}
 	
-	public static Utils getInstance() {
+	public static Util getInstance() {
 		if (utils == null)
-			utils = new Utils();
+			utils = new Util();
 		return utils;
 	}
 	
@@ -50,7 +50,7 @@ public class Utils {
 	}
 	
 	public static final String readQuery(String query) {
-		return Utils.getInstance().readTxtFromClasspath(query);
+		return Util.getInstance().readTxtFromClasspath(query);
 	}
 	
 }

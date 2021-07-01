@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.northwind.northwind.model.Customers;
+import com.northwind.northwind.model.Customer;
 
-public class CostumersRowMapper implements RowMapper<Customers> {
+public class CostumerRowMapper implements RowMapper<Customer> {
 	
 	
 	private static final String CUSTOMER_ID	  = "CustomerID";
@@ -23,8 +23,8 @@ public class CostumersRowMapper implements RowMapper<Customers> {
 	private static final String FAX	  		  = "Fax";
 	
 	@Override
-	public Customers mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Customers customer = new Customers();
+	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Customer customer = new Customer();
 		customer.setCustomerID(rs.getString(CUSTOMER_ID));
 		customer.setCompanyName(rs.getString(COMPANY_NAME));
 		customer.setContactName(rs.getString(CONTACT_NAME));

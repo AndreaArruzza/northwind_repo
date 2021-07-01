@@ -2,7 +2,7 @@ package com.northwind.northwind.resource;
 
 import java.time.LocalDateTime;
 
-public class ShipInformationOrders {
+public class ShipInformationOrder {
 	 private String shipName;
 	 private String shipCity;
 	 private String shipPostalCode;

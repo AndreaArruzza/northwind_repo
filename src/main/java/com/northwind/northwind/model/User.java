@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "Users")
-public class Users {
+public class User {
 	@Field(name = "UserID")
 	private String userID;
 	
@@ -14,13 +14,31 @@ public class Users {
 	@Field(name = "Password")
 	private String password;
 	
-	@Field(name = "Role")
-	private String role;
-	
 	@Field(name = "CustomerID")
 	private String customerID;
 	
+	@Field(name = "RoleID")
+	private Integer roleID;
 	
+	private String roleName;
+	
+
+	public Integer getRoleID() {
+		return roleID;
+	}
+
+	public void setRoleID(Integer roleID) {
+		this.roleID = roleID;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	public String getCustomerID() {
 		return customerID;
 	}
@@ -52,16 +70,5 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	
-	
 
 }

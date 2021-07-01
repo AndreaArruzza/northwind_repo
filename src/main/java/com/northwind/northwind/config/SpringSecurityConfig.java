@@ -10,14 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.northwind.northwind.service.NorthwindUsersDetailService;
+import com.northwind.northwind.service.NorthwindUserDetailService;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
-	public NorthwindUsersDetailService usersDetailService() {
-		return new NorthwindUsersDetailService();
+	public NorthwindUserDetailService usersDetailService() {
+		return new NorthwindUserDetailService();
 	}
 	
 	@Bean 

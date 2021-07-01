@@ -7,17 +7,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.northwind.northwind.model.NorthwindUsersDetails;
-import com.northwind.northwind.model.Users;
-import com.northwind.northwind.repository.UsersRepository;
+import com.northwind.northwind.model.User;
+import com.northwind.northwind.repository.UserRepository;
 
 @Component
-public class NorthwindUsersDetailService implements UserDetailsService {
+public class NorthwindUserDetailService implements UserDetailsService {
 
 	@Autowired
-	UsersRepository usersRepository;
+	UserRepository usersRepository;
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Users user = usersRepository.getUserByEmail(email);
+	public UserDetails loadUserByUsername(String email) {
+		User user = usersRepository.getUserByEmail(email);
 		if(user == null) {
 			throw new UsernameNotFoundException(" nessun user trovato con la seguente email ");
 		}

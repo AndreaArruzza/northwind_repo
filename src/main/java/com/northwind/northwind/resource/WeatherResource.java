@@ -9,6 +9,7 @@ public class WeatherResource {
 	private Double tempMax;
 	private Integer humidity;
 	private String descrTemp;
+	private String message;
 	
 	public LocalDateTime getDate() {
 		return date;
@@ -46,5 +47,12 @@ public class WeatherResource {
 	public void setDescrTemp(String descrTemp) {
 		this.descrTemp = descrTemp;
 	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 	
 }

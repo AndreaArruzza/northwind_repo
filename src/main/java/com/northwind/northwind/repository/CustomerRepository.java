@@ -1,5 +1,5 @@
 package com.northwind.northwind.repository;
 
-public class CustomersRepository {
+public class CustomerRepository {
 
 }

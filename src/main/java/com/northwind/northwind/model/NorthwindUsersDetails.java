@@ -3,30 +3,25 @@ package com.northwind.northwind.model;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.northwind.northwind.repository.RolesRepository;
 
 public class NorthwindUsersDetails implements UserDetails {
 	
 
 	private static final long serialVersionUID = -2419178299606274127L;
 
-	private Users user;
+	private User user;
 	
-	@Autowired
-	RolesRepository roleRepo;
 	
-	public NorthwindUsersDetails(Users user) {
+	public NorthwindUsersDetails(User user) {
 		this.user = user;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-	     return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
+	     return Collections.singleton(new SimpleGrantedAuthority(user.getRoleName()));
 	}
 
 	
@@ -58,5 +53,17 @@ public class NorthwindUsersDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	public Integer getRoleID() {
+		return user.getRoleID();
+	}
+
+	public String getRoleName() {
+		return user.getRoleName();
+	}
+
+	public String getCustomerID() {
+		return user.getCustomerID();
 	}
 }

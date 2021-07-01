@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value="Orders")
-public class Orders {
+public class Order {
 	 @Field(name = "OrderID")
 	 private Integer orderID;
 	 @Field(name = "CustomerID")
@@ -35,16 +35,6 @@ public class Orders {
 	 private String shipPostalCode;
 	 @Field(name = "ShipCountry")
 	 private String shipCountry;
-	 
-	 private Boolean newOrder;
-	 
-
-	public Boolean getNewOrder() {
-		return newOrder;
-	}
-	public void setNewOrder(Boolean newOrder) {
-		this.newOrder = newOrder;
-	}
 	public Integer getOrderID() {
 		return orderID;
 	}
@@ -130,6 +120,7 @@ public class Orders {
 		this.shipCountry = shipCountry;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "Orders [orderID=" + orderID + ", customerID=" + customerID + ", employeeID=" + employeeID
@@ -138,5 +129,7 @@ public class Orders {
 				+ shipAddress + ", shipCity=" + shipCity + ", shipRegion=" + shipRegion + ", shipPostalCode="
 				+ shipPostalCode + ", shipCountry=" + shipCountry + "]";
 	}
+	 
+	
 	 
 }

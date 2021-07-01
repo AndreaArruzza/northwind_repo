@@ -4,6 +4,8 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,26 +20,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.northwind.northwind.assembler.OrdersAssembler;
-import com.northwind.northwind.exception.OrdersException;
-import com.northwind.northwind.model.Orders;
-import com.northwind.northwind.resource.OrdersResource;
-import com.northwind.northwind.service.OrdersService;
+import com.northwind.northwind.model.NorthwindUsersDetails;
+import com.northwind.northwind.model.OrderIn;
+import com.northwind.northwind.resource.OrderResource;
+import com.northwind.northwind.service.OrderService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping(path="/order", produces = { MediaType.APPLICATION_JSON_VALUE, "application/hal+json" })
-public class OrdersController {
-	private static final Logger logger = LoggerFactory.getLogger(OrdersController.class);
+@RequestMapping(path="/orders", produces = { MediaType.APPLICATION_JSON_VALUE, "application/hal+json" })
+public class OrderController {
+	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
-	OrdersService service;
-	
-	@Autowired
-	OrdersAssembler assembler;
+	private OrderService service;
 	
 	@ApiOperation(value = "return orders by authentication")
 	@ApiResponses(value = {
@@ -45,14 +43,14 @@ public class OrdersController {
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@GetMapping
-	public List<OrdersResource> getOrders() throws OrdersException {
+	@GetMapping("/authentication")
+	public ResponseEntity<List<OrderResource>> getOrdersByAuthentication(){
 		logger.info("[getOrders] - [START]");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		List<OrdersResource> resource = service.getOrdersByCustomerID(authentication.getName());
+		NorthwindUsersDetails principal = (NorthwindUsersDetails) authentication.getPrincipal();
+		List<OrderResource> resource = service.getOrdersByCustomerID(principal.getCustomerID());
 		logger.info("[getOrders] - [END]");
-		return resource;
+		return ok(resource);
 	}
 	
 
@@ -62,11 +60,11 @@ public class OrdersController {
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@GetMapping("/{customerID}")
-	public ResponseEntity<List<OrdersResource>>  getOrdersByCustomerID(@RequestParam("customerID") String customerID) throws OrdersException {
+	@GetMapping("/customer-id")
+	public ResponseEntity<List<OrderResource>>  getOrdersByCustomerID(@RequestParam("customerID") String customerID) {
 		logger.info("[getOrdersByCustomerID] - [START]");
 
-		List<OrdersResource> resource = (service.getOrdersByCustomerID(customerID));
+		List<OrderResource> resource = (service.getOrdersByCustomerID(customerID));
 		logger.info("[getOrdersByCustomerID] - [END]");
 		return ok(resource);
 	}
@@ -79,13 +77,12 @@ public class OrdersController {
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@GetMapping("/{orderID}")
-	public ResponseEntity<List<OrdersResource>>  getOrdersByOrderID(@RequestParam("orderID") Integer orderID) throws OrdersException {
-		logger.info("[getOrdersByOrderID] - [START]");
-
-		List<OrdersResource> resource = (service.getOrdersByOrderID(orderID));
-		logger.info("[getOrdersByOrderID] - [END]");
-		return ok(resource);
+	@GetMapping("/order-id")
+	public ResponseEntity<List<OrderResource>>  getOrdersByOrderID(@RequestParam("orderID") Integer orderID){
+		  logger.info("[getOrdersByOrderID] - [START]");
+		  List<OrderResource> resource = (service.getOrdersByOrderID(orderID));
+		  logger.info("[getOrdersByOrderID] - [END]");
+		  return ok(resource);
 	}
 	
 	
@@ -95,14 +92,13 @@ public class OrdersController {
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@GetMapping("/{shipCountry}/{shipName}")
-	public ResponseEntity<List<OrdersResource>>  getOrdersShipCountryShipName(@RequestParam("shipCountry") String shipCountry,
-																  				@RequestParam("shipName")   String shipName) throws OrdersException {
-		logger.info("[getOrdersShipCountryShipName] - [START]");
-
-		List<OrdersResource> resource = (service.getOrdersShipCountryShipName(shipCountry, shipName));
-		logger.info("[getOrdersShipCountryShipName] - [END]");
-		return ok(resource);
+	@GetMapping("/shpCountry-shipName")
+	public ResponseEntity<List<OrderResource>>  getOrdersShipCountryShipName(@RequestParam("shipCountry") String shipCountry,
+																  			  @RequestParam("shipName")    String shipName) {
+		  logger.info("[getOrdersShipCountryShipName] - [START]");
+		  List<OrderResource> resource = (service.getOrdersShipCountryShipName(shipCountry, shipName));
+		  logger.info("[getOrdersShipCountryShipName] - [END]");
+		  return ok(resource);
 	}
 	
 	
@@ -112,11 +108,12 @@ public class OrdersController {
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@PostMapping
-	public ResponseEntity<String> insertNewOrder(@RequestBody Orders createOrdersDTO) throws OrdersException  {
-		logger.info("[insertNewOrder] - [START]");
-		service.insertNewOrder(createOrdersDTO);
-		logger.info("[insertNewOrder] - [END]");
-		return ResponseEntity.ok("Inserimento avvenuto con successo.");
+	@PostMapping("/insert")
+	public ResponseEntity<String> insertNewOrder(@RequestBody @Valid OrderIn newOrder){
+		  logger.info("[insertNewOrder] - [START]");
+		  service.insertNewOrder(newOrder);
+		  logger.info("[insertNewOrder] - [END]");
+		  return ResponseEntity.ok("inserimento avvenuto con successo");
 	}
+	
 }

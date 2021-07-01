@@ -1,16 +1,16 @@
 package com.northwind.northwind.resource;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class OrdersResource {
+public class OrderResource {
 	 private Integer orderID;
 	 private LocalDateTime orderDate;
 	 private String CustomerID;
 	 private LocalDateTime requiredDate;
 	 private Double freight;
-	 List<ShipInformationOrders> shipInformationOrders;
+	 List<ShipInformationOrder> shipInformationOrders;
+	 private String message;
 	 
 	public Integer getOrderID() {
 		return orderID;
@@ -36,10 +36,10 @@ public class OrdersResource {
 	public void setFreight(Double freight) {
 		this.freight = freight;
 	}
-	public List<ShipInformationOrders> getShipInformationOrders() {
+	public List<ShipInformationOrder> getShipInformationOrders() {
 		return shipInformationOrders;
 	}
-	public void setShipInformationOrders(List<ShipInformationOrders> shipInformationOrders) {
+	public void setShipInformationOrders(List<ShipInformationOrder> shipInformationOrders) {
 		this.shipInformationOrders = shipInformationOrders;
 	}
 	public String getCustomerID() {
@@ -47,6 +47,12 @@ public class OrdersResource {
 	}
 	public void setCustomerID(String customerID) {
 		CustomerID = customerID;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String Message) {
+		this.message = message;
 	}
 	
 	

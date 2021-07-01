@@ -7,26 +7,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.northwind.northwind.model.Orders;
-import com.northwind.northwind.resource.OrdersResource;
-import com.northwind.northwind.resource.ShipInformationOrders;
+import com.northwind.northwind.model.Order;
+import com.northwind.northwind.resource.OrderResource;
+import com.northwind.northwind.resource.ShipInformationOrder;
 
 @Component
 public class OrdersAssembler {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrdersAssembler.class);
 	
-    public OrdersResource toResource (Orders orders) {
+    public OrderResource toResource (Order orders) {
     	logger.info("[toResource] - [START]");
-    	OrdersResource orderResource = new OrdersResource();
-    	ShipInformationOrders ship = new ShipInformationOrders();
-    	List<ShipInformationOrders> shipInf = new ArrayList<>();
+    	OrderResource orderResource = new OrderResource();
+    	ShipInformationOrder ship = new ShipInformationOrder();
+    	List<ShipInformationOrder> shipInf = new ArrayList<>();
 
     	orderResource.setOrderID(orders.getOrderID());
         orderResource.setOrderDate(orders.getOrderDate());
+        orderResource.setCustomerID(orders.getCustomerID());
         orderResource.setFreight(orders.getFreight());
         orderResource.setRequiredDate(orders.getOrderDate());
-        orderResource.setCustomerID(orders.getCustomerID());
         
         ship.setShipCity(orders.getShipCity());
         ship.setShipCountry(orders.getShipCountry());

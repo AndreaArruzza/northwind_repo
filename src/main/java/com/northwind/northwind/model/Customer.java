@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "Customers")
-public class Customers {
+public class Customer {
 	 @Field(name = "CustomerID")
 	 private String customerID;
 	 

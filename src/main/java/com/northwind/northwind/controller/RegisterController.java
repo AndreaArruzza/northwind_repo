@@ -1,5 +1,7 @@
 package com.northwind.northwind.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.northwind.northwind.assembler.OrdersAssembler;
 import com.northwind.northwind.exception.UserAlreadyExistException;
-import com.northwind.northwind.model.Users;
+import com.northwind.northwind.model.UserIn;
 import com.northwind.northwind.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -27,22 +28,19 @@ public class RegisterController {
 	
 	
 	@Autowired
-	UserService service;
+	private UserService service;
 	
-	@Autowired
-	OrdersAssembler assembler;
-	
-	@ApiOperation(value = "insert new order")
+	@ApiOperation(value = "insert new user")
 	@ApiResponses(value = {
 	            @ApiResponse(code = 200, message = "Success|OK"),
 	            @ApiResponse(code = 401, message = "not authorized!"),
 	            @ApiResponse(code = 403, message = "forbidden!!!"),
 	            @ApiResponse(code = 404, message = "not found!!!") })
-	@PostMapping
-	public ResponseEntity<String> insertNewUser(@RequestBody Users createUsers) throws UserAlreadyExistException {
-		logger.info("[register] - [START]");
-		service.insertNewUser(createUsers);
-		logger.info("[register] - [END]");
-		return ResponseEntity.ok("Inserimento avvenuto con successo.");
+	@PostMapping("/insert")
+	public ResponseEntity<String> insertNewUser(@RequestBody @Valid UserIn newUser) throws UserAlreadyExistException {
+		 logger.info("[insertNewUser] - [START]");
+		 service.insertNewUser(newUser);
+		 logger.info("[insertNewUser] - [END]");
+		 return ResponseEntity.ok("inserimento avvenuto con successo");
 	}
 }
